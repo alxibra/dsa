@@ -10,6 +10,8 @@ func main() {
 	fmt.Println("max id: ", maxID)
 }
 
+// solutionOne use 2 step approach
+// separation of concern, easy to reason about, maintain and debug
 func solutionOne(birds []int) int {
 	var counts [6]int
 	var max int
@@ -27,6 +29,9 @@ func solutionOne(birds []int) int {
 	}
 	return maxID
 }
+
+// solutionOne use 1 step approach
+// only one looping more efficient
 func solutionTwo(birds []int) int {
 	var counts [6]int
 	var max int
