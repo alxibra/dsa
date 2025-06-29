@@ -16,6 +16,7 @@ func solutionOne(nums []int) []int {
 
 	var missingNumbers []int
 	for index, count := range counts {
+		// if count = 0, it must not present in nums
 		if count == 0 {
 			missingNumbers = append(missingNumbers, index)
 		}
