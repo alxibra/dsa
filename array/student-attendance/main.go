@@ -16,23 +16,31 @@ func main() {
 
 func solutionOne(records string) bool {
 	var counts [3]int
-	var consecutive int
+	var late int
 
 	for _, character := range records {
 		cm := characterMap(character)
 		counts[cm]++
+
+		// Check for more than one absence (A)
 		if cm == 1 && counts[cm] > 1 {
 			return false
 		}
-		if cm == 1 || cm == 0 {
-			consecutive = 0
+
+		// Reset late counter when encountering Present (P) or Absent (A)
+		if cm == 0 || cm == 1 {
+			late = 0
 		}
+
+		// Track consecutive late days (L)
 		if cm == 2 {
-			consecutive++
+			late++
+			// Fail if 3 consecutive late days
+			if late == 3 {
+				return false
+			}
 		}
-		if consecutive == 3 {
-			return false
-		}
+
 	}
 	return true
 }
