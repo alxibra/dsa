@@ -6,8 +6,8 @@ import (
 
 func main() {
 	// records := "PPALLP"
-	records := "PPPALLL"
-	if solutionOne(records) {
+	records := "PPPAALL"
+	if solutionTwo(records) {
 		fmt.Println("Award")
 		return
 	}
@@ -56,4 +56,31 @@ func characterMap(c rune) int {
 	default:
 		return 100
 	}
+}
+
+func solutionTwo(records string) bool {
+	var counts [3]int
+	var late int
+
+	for _, c := range records {
+		index := characterMap(c)
+		counts[index]++
+
+		switch index {
+		case 0:
+			late = 0
+			continue
+		case 1:
+			late = 0
+			if counts[index] == 2 {
+				return false
+			}
+		case 2:
+			late++
+			if late == 3 {
+				return false
+			}
+		}
+	}
+	return true
 }
