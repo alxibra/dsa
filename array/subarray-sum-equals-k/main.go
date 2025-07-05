@@ -12,6 +12,8 @@ func main() {
 
 func solutionOne(nums []int, k int) int {
 	var prefix, count int
+	// prefixMap stores prefix sums as keys, and the number of times
+	// that prefix sum has been seen as values.
 	prefixMap := map[int]int{0: 1}
 	for _, num := range nums {
 		prefix += num
