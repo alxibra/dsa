@@ -6,7 +6,8 @@ func main() {
 	nums := []int{1, 7, 3, 6, 5, 6}
 	fmt.Println("nums: ", nums)
 	// fmt.Printf("pivotIndex: %d\n", solutionOne(nums))
-	fmt.Printf("pivotIndex: %d\n", solutionTwo(nums))
+	// fmt.Printf("pivotIndex: %d\n", solutionTwo(nums))
+	fmt.Printf("pivotIndex: %d\n", solutionThree(nums))
 }
 
 func solutionOne(nums []int) int {
@@ -53,6 +54,33 @@ func solutionTwo(nums []int) int {
 		rightSum = prefixMap[len(prefixMap)-1] - prefixMap[key-1]
 		if leftSum == rightSum {
 			return key
+		}
+	}
+	return pivotIndex
+}
+
+func solutionThree(nums []int) int {
+	pivotIndex := -1
+	prefixMap := make([]int, len(nums))
+
+	for index, num := range nums {
+		if index == 0 {
+			prefixMap[index] = num
+			continue
+		}
+		prefixMap[index] = prefixMap[index-1] + num
+	}
+
+	var leftSum int
+	var rightSum int
+	for index, num := range prefixMap {
+		if index == 0 {
+			continue
+		}
+		leftSum = num
+		rightSum = prefixMap[len(prefixMap)-1] - prefixMap[index-1]
+		if leftSum == rightSum {
+			return index
 		}
 	}
 	return pivotIndex
