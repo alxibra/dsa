@@ -38,3 +38,24 @@ func solutionTwo(left, right int, nums []int) int {
 	}
 	return nums[right] + nums[left-1]
 }
+
+func solutionThree(left, right int, nums []int) int {
+	prefixSum := make(map[int]int)
+
+	for index, num := range nums {
+
+		if index == 0 {
+			prefixSum[index] = num
+			continue
+		}
+
+		prefixSum[index] = prefixSum[index-1] + num
+
+	}
+
+	if left == 0 {
+		return prefixSum[right]
+	}
+
+	return prefixSum[right] - prefixSum[left-1]
+}
