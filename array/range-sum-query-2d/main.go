@@ -7,6 +7,7 @@ type NumMatrix struct {
 }
 
 func main() {
+	row1, column1, row2, column2 := 2, 1, 4, 3
 	matrix := [][]int{
 		{3, 0, 1, 4, 2},
 		{5, 6, 3, 2, 1},
@@ -17,7 +18,19 @@ func main() {
 	printMatrixWithIndexes(matrix)
 	nm := constructor(matrix)
 	fmt.Println("")
+	fmt.Println("\tPrefix Sum Region")
 	printMatrixWithIndexes(nm.prefix)
+	fmt.Println("")
+	fmt.Printf("sumRegion: %d\n", nm.sumRegion(row1, column1, row2, column2))
+}
+
+func (nm NumMatrix) sumRegion(row1, column1, row2, column2 int) int {
+	fmt.Printf("row_1: %d, column_1: %d, row_2: %d, column_2: %d\n", row1, column1, row2, column2)
+	p := nm.prefix
+	return p[row2+1][column2+1] -
+		p[row1][column2+1] -
+		p[row2+1][column1] +
+		p[row1][column1]
 }
 
 func constructor(matrix [][]int) NumMatrix {
