@@ -15,11 +15,11 @@ func main() {
 		{4, 1, 0, 1, 7},
 		{1, 0, 3, 0, 5},
 	}
-	printMatrixWithIndexes(matrix)
+	printMatrix(matrix)
 	nm := constructor(matrix)
 	fmt.Println("")
 	fmt.Println("\tPrefix Sum Region")
-	printMatrixWithIndexes(nm.prefix)
+	printMatrix(nm.prefix)
 	fmt.Println("")
 	fmt.Printf("sumRegion: %d\n", nm.sumRegion(row1, column1, row2, column2))
 }
@@ -57,37 +57,24 @@ func constructor(matrix [][]int) NumMatrix {
 }
 
 func printMatrix(matrix [][]int) {
-	for _, row := range matrix {
-		fmt.Print("[ ")
-		for _, val := range row {
-			fmt.Printf("%3d ", val) // align with 3-digit width
-		}
-		fmt.Println("]")
-	}
-}
-
-func printMatrixWithIndexes(matrix [][]int) {
-	rows := len(matrix)
-	cols := len(matrix[0])
-
 	// Column headers
 	fmt.Printf("     ")
-	for j := 0; j < cols; j++ {
+	for j := range matrix[0] {
 		fmt.Printf(" %2d ", j)
 	}
 	fmt.Println()
 
 	fmt.Printf("     ")
-	for j := 0; j < cols; j++ {
+	for range matrix[0] {
 		fmt.Print("----")
 	}
 	fmt.Println()
 
-	// Row data
-	for i := 0; i < rows; i++ {
+	// Row data with range
+	for i, row := range matrix {
 		fmt.Printf(" %2d |", i)
-		for j := 0; j < cols; j++ {
-			fmt.Printf(" %2d ", matrix[i][j])
+		for _, val := range row {
+			fmt.Printf(" %2d ", val)
 		}
 		fmt.Println()
 	}
