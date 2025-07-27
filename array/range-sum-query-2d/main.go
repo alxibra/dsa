@@ -2,10 +2,6 @@ package main
 
 import "fmt"
 
-type NumMatrix struct {
-	prefix [][]int
-}
-
 func main() {
 	row1, column1, row2, column2 := 2, 1, 4, 3
 	matrix := [][]int{
@@ -15,45 +11,13 @@ func main() {
 		{4, 1, 0, 1, 7},
 		{1, 0, 3, 0, 5},
 	}
-	printMatrix(matrix)
-	nm := constructor(matrix)
-	fmt.Println("")
-	fmt.Println("\tPrefix Sum Region")
-	printMatrix(nm.prefix)
-	fmt.Println("")
-	fmt.Printf("sumRegion: %d\n", nm.sumRegion(row1, column1, row2, column2))
+
+	fmt.Println("solutionOne: ", solutionOne(row1, column1, row2, column2, matrix))
 }
 
-func (nm NumMatrix) sumRegion(row1, column1, row2, column2 int) int {
-	fmt.Printf("row_1: %d, column_1: %d, row_2: %d, column_2: %d\n", row1, column1, row2, column2)
-	p := nm.prefix
-	return p[row2+1][column2+1] -
-		p[row1][column2+1] -
-		p[row2+1][column1] +
-		p[row1][column1]
-}
-
-func constructor(matrix [][]int) NumMatrix {
-	row := len(matrix)
-	column := len(matrix[0])
-
-	prefixSum := make([][]int, row+1)
-
-	for index := range prefixSum {
-		prefixSum[index] = make([]int, column+1)
-	}
-
-	for i := range row {
-		for j := range column {
-			prefixSum[i+1][j+1] =
-				matrix[i][j] +
-					prefixSum[i][j+1] +
-					prefixSum[i+1][j] -
-					prefixSum[i][j]
-		}
-	}
-
-	return NumMatrix{prefixSum}
+func solutionOne(r1, c1, r2, c2 int, m [][]int) int {
+	ps := generatePrefixSum2D(m)
+	return sumOfRegion(r1, c1, r2, c2, ps)
 }
 
 func printMatrix(matrix [][]int) {
@@ -78,4 +42,33 @@ func printMatrix(matrix [][]int) {
 		}
 		fmt.Println()
 	}
+}
+
+func generatePrefixSum2D(m [][]int) [][]int {
+	rowCount := len(m)
+	columnCount := len(m[0])
+
+	prefixSum := make([][]int, rowCount+1)
+
+	for index := range prefixSum {
+		prefixSum[index] = make([]int, columnCount+1)
+	}
+
+	for i := range rowCount {
+		for j := range columnCount {
+			prefixSum[i+1][j+1] = m[i][j] +
+				prefixSum[i][j+1] +
+				prefixSum[i+1][j] -
+				prefixSum[i][j]
+		}
+	}
+
+	return prefixSum
+}
+
+func sumOfRegion(r1, c1, r2, c2 int, ps [][]int) int {
+	return ps[r2+1][c2+1] -
+		ps[r1][c2+1] -
+		ps[r2+1][c1] +
+		ps[r1][c1]
 }
