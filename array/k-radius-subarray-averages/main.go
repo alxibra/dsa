@@ -9,39 +9,42 @@ import (
 func main() {
 	arr := []int{7, 4, 3, 9, 1, 8, 5, 2, 6}
 	k := 3
-	expected := []int{-1, -1, -1, 5, 4, 4, -1, -1, -1}
-	results := make([]int, len(expected))
-	prefixSumTable := make([]int, len(expected))
+	fmt.Println("solutionOne: ", solutionOne(k, arr))
+}
 
-	fmt.Println("'arr'")
-	printSlice(arr)
-	fmt.Println("expected")
-	printSlice(expected)
-	fmt.Printf("k: %d\n", k)
-
-	for i := range results {
-		results[i] = -1
-	}
+func solutionOne(k int, arr []int) []int {
 	prefixSum := 0
+	prefixSumTable := make([]int, len(arr))
+	solution := make([]int, len(arr))
+
+	if k == 0 {
+		return arr
+	}
+
+	window := (2 * k) + 1
+	if window > len(arr) {
+		return arr
+	}
 	for i, v := range arr {
 		prefixSum += v
 		prefixSumTable[i] = prefixSum
 	}
 
-	for i := k; i < len(results)-k; i++ {
-		var leftSum int
-		left := i - k - 1
-		leftSum = 0
-		if left >= 0 {
-			leftSum = prefixSumTable[left]
-		}
-		rightSum := prefixSumTable[i+k]
-		results[i] = (rightSum - leftSum) / (2*k + 1)
+	for i := range solution {
+		solution[i] = -1
 	}
 
-	fmt.Println("")
-	fmt.Println("results")
-	printSlice(results)
+	for i := k; i < len(arr)-k; i++ {
+		if i == k {
+			average := prefixSumTable[i+k] / ((2 * k) + 1)
+			solution[i] = average
+			continue
+		}
+		sum := prefixSumTable[i+k] - prefixSumTable[i-k-1]
+		average := (sum) / ((2 * k) + 1)
+		solution[i] = average
+	}
+	return solution
 }
 
 func printSlice(nums []int) {
