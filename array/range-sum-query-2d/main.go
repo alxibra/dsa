@@ -3,20 +3,27 @@ package main
 import "fmt"
 
 func main() {
-	row1, column1, row2, column2 := 2, 1, 4, 3
+	// row1, column1, row2, column2 := 2, 1, 4, 3
+	// matrix := [][]int{
+	// 	{3, 0, 1, 4, 2},
+	// 	{5, 6, 3, 2, 1},
+	// 	{1, 2, 0, 1, 5},
+	// 	{4, 1, 0, 1, 7},
+	// 	{1, 0, 3, 0, 5},
+	// }
+	row1, column1, row2, column2 := 0, 0, 1, 1
 	matrix := [][]int{
-		{3, 0, 1, 4, 2},
-		{5, 6, 3, 2, 1},
-		{1, 2, 0, 1, 5},
-		{4, 1, 0, 1, 7},
-		{1, 0, 3, 0, 5},
+		{1, 2},
+		{3, 4},
 	}
-
 	fmt.Println("solutionOne: ", solutionOne(row1, column1, row2, column2, matrix))
 }
 
 func solutionOne(r1, c1, r2, c2 int, m [][]int) int {
+	printMatrix(m)
 	ps := generatePrefixSum2D(m)
+	fmt.Println("")
+	printMatrix(ps)
 	return sumOfRegion(r1, c1, r2, c2, ps)
 }
 

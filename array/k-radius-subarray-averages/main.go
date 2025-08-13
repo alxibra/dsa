@@ -16,11 +16,9 @@ func solutionOne(k int, arr []int) []int {
 	prefixSum := 0
 	prefixSumTable := make([]int, len(arr))
 	solution := make([]int, len(arr))
-
 	if k == 0 {
 		return arr
 	}
-
 	window := (2 * k) + 1
 	if window > len(arr) {
 		return arr
@@ -29,20 +27,15 @@ func solutionOne(k int, arr []int) []int {
 		prefixSum += v
 		prefixSumTable[i] = prefixSum
 	}
-
 	for i := range solution {
 		solution[i] = -1
 	}
-
 	for i := k; i < len(arr)-k; i++ {
 		if i == k {
-			average := prefixSumTable[i+k] / ((2 * k) + 1)
-			solution[i] = average
+			solution[i] = prefixSumTable[i+k] / ((2 * k) + 1)
 			continue
 		}
-		sum := prefixSumTable[i+k] - prefixSumTable[i-k-1]
-		average := (sum) / ((2 * k) + 1)
-		solution[i] = average
+		solution[i] = (prefixSumTable[i+k] - prefixSumTable[i-k-1]) / ((2 * k) + 1)
 	}
 	return solution
 }

@@ -6,8 +6,9 @@ import (
 
 func main() {
 	nums := []int{-2, 0, 3, -5, 2, -1}
-	fmt.Println("sum: ", solutionOne(2, 4, nums))
+	// fmt.Println("sum: ", solutionOne(2, 4, nums))
 	fmt.Println("sum: ", solutionTwo(2, 4, nums))
+	// fmt.Println("sum: ", solutionThree(2, 4, nums))
 }
 
 // NOTE: use this solution for better
@@ -33,13 +34,17 @@ func solutionTwo(left, right int, nums []int) int {
 		}
 		nums[i] = nums[i-1] + num
 	}
+	fmt.Printf("nums: %v\n", nums)
 	if left == 0 {
 		return nums[right]
 	}
-	return nums[right] + nums[left-1]
+	fmt.Printf("right: %d\n", nums[right])
+	fmt.Printf("left: %d\n", nums[left-1])
+	return nums[right] - nums[left-1]
 }
 
 func solutionThree(left, right int, nums []int) int {
+
 	prefixSum := make(map[int]int)
 
 	for index, num := range nums {
