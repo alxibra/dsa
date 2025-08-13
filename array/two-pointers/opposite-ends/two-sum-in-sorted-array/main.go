@@ -10,7 +10,7 @@ func main() {
 }
 
 func solutionOne(nums []int, target int) []int {
-	var result []int
+	result := []int{}
 	left, right, sum := 0, len(nums)-1, 0
 
 	if len(nums) < 2 {
