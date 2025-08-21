@@ -51,7 +51,6 @@ func solutionOne(target int, nums []int) [][]int {
 			second := nums[left]
 			third := nums[right]
 			sum := first + second + third
-			fmt.Printf("first + second + third = sum: %d+%d+%d = %d\n", first, second, third, sum)
 			if sum == target {
 				result = append(result, []int{first, second, third})
 				left++
