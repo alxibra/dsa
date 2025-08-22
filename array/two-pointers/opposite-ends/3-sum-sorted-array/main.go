@@ -7,33 +7,6 @@ import (
 func main() {
 	nums := []int{-4, -1, -1, 0, 1, 2}
 	target := 0
-	// result := [][]int{}
-	// dsahelper.PrintSlice(nums)
-
-	// for i := range nums[:len(nums)-2] {
-	// 	if i > 0 && nums[i] == nums[i-1] {
-	// 		continue
-	// 	}
-	// 	left, right := i+1, len(nums)-1
-	//
-	// 	for left < right {
-	// 		sum := nums[i] + nums[left] + nums[right]
-	// 		if sum == target {
-	// 			result = append(result, []int{nums[i], nums[left], nums[right]})
-	// 			left++
-	// 			right--
-	// 			continue
-	// 		}
-	//
-	// 		if sum < target {
-	// 			left++
-	// 			continue
-	// 		}
-	//
-	// 		right--
-	// 	}
-	// }
-
 	fmt.Println("result: ", solutionOne(target, nums))
 }
 
