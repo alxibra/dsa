@@ -12,12 +12,12 @@ func main() {
 
 func solutionOne(target int, nums []int) [][]int {
 	var result [][]int
-	// dsahelper.PrintSlice(nums)
-	fmt.Println("nums: ", nums)
 	for i := range nums[:len(nums)-2] {
+
 		if i > 0 && nums[i] == nums[i-1] {
 			continue
 		}
+
 		first := nums[i]
 		left, right := i+1, len(nums)-1
 		for left < right {
@@ -26,20 +26,26 @@ func solutionOne(target int, nums []int) [][]int {
 			sum := first + second + third
 			if sum == target {
 				result = append(result, []int{first, second, third})
+
+				for left < right && nums[left] == nums[left+1] {
+					left++
+				}
+				for left < right && nums[right] == nums[right-1] {
+					right--
+				}
+
 				left++
 				right--
 			}
 
 			if sum < target {
 				left++
-				continue
 			}
 
 			if sum > target {
 				right--
 			}
 		}
-		fmt.Println("")
 	}
 	return result
 }
