@@ -12,10 +12,13 @@ func main() {
 }
 
 func solutionOne(nums []int) int {
+
 	max, left, right := 0, 0, len(nums)-1
 
 	for left < right {
+
 		currentArea := getArea(left, right, nums)
+
 		if currentArea > max {
 			max = currentArea
 		}
