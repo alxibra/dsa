@@ -1,3 +1,3 @@
-module github.com/alxibra/merge-sorted-array
+module github.com/alxibra/is-subsequent
 
 go 1.24.1
